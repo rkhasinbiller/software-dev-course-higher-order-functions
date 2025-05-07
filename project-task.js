@@ -35,6 +35,7 @@ Create a function `filterProducts` that accepts:
 - an array of products
 - a callback function
 
+
 The callback should determine which products to include.
 Example: filter by availability or price threshold.
 
@@ -43,7 +44,12 @@ Step-by-Step:
 2. Use the `filter()` method to apply the callback to the array.
 3. Return the filtered result.
 */
+ function filterProducts(products, callback) {
+  return products.filter(callback)
 
+ }
+ let isInStock = filterProducts(products, banana => banana.inStock)
+console.log(isInStock);
 
 /*
 🔹 Task 2: Transform Product Names
@@ -56,7 +62,13 @@ Step-by-Step:
 3. Store the result in a new variable.
 */
 
+function upperCaseProducts(products) {
+  return products.map(products => products.name.toUpperCase())
 
+}
+
+let upperCaseOnly = upperCaseProducts(products);
+console.log(upperCaseOnly);
 /*
 🔹 Task 3: Generate Discounted Prices
 
@@ -70,7 +82,19 @@ Step-by-Step:
 3. Use this returned function inside a `map()` call to apply discounts to all products.
 */
 
+function applyDiscount(discountPercent) {
+  return function(price){
+    return price - (price * discountPercent/100);
+   
+  }
+}
 
+const discount10 = applyDiscount(20);
+const discountedProducts = products.map((product) => ({
+  ...product,
+  price: discount10(product.price)
+}));
+console.log(discountedProducts);
 /*
 🔹 Task 4: Calculate Total Inventory Value
 
